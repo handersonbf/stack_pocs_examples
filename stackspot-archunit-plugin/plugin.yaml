@@ -1,0 +1,43 @@
+name: stackspot-archunit-plugin
+description: Add Arch Unit plugin to project
+display-name: stackspot-archunit-plugin
+picture: plugin.png
+category: backend # Ref: https://docs.stackspot.com/latest/docs/creators-guide/yaml/#category
+compatibility:
+  - java
+  - spring
+about: docs/about.md
+usage: docs/usage.md
+use-case: docs/use-case.md
+implementation: docs/implementation.md
+technologies: # Ref: https://docs.stackspot.com/latest/docs/creators-guide/yaml/#technologies
+  - "Api"
+types:
+  - app
+inputs:
+  - label: Base package of the application that will be tested (br.com.userede...)?
+    type: text
+    name: package_base
+  - label: Arch Unit Version (archunit|junit5-engine|junit5-api)
+    type: text
+    name: version_archunit
+    default: 0.23.1
+computedInputs:
+  package_folders: "{{package_base|replace('.','/')}}"
+hooks:
+  - type: edit
+    trigger: after-render
+    path: pom.xml
+    changes:
+      - search:
+          string: "</dependencies>"
+          insert-before:
+            snippet: templates/snippet/dependency_archunit.xml
+  - type: run
+    trigger: after-render
+    linux:
+      - echo hello
+    windows:
+      - cmd /c rmdir /s /q snippet
+    mac:
+      - echo hello
