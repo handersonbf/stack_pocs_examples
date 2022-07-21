@@ -1,0 +1,22 @@
+include:
+  - project: 'DevOps/templates/ci_cd'
+    file: 'terraform_ecs_blue_green.yaml'
+
+variables:
+  DISABLE_INSPECTION: "true"
+  DISABLE_PUBLISH: "true"
+  DISABLE_DEPLOY_DEV: "true"
+  DISABLE_DEPLOY_HOM: "true"
+  DISABLE_DEPLOY_PRD: "true"
+  TERRAFORM_MIGRATE_OLD_TFSTATE: "ECS/{environment}/AI/{{name_app}}.tfstate" # Olhar no arquivo apply.sh
+  TERRAFORM_VERSION: 1.0.9
+
+dev_destroy:
+  only:
+    - develop
+
+dev_apply:
+  only:
+    - develop
+
+

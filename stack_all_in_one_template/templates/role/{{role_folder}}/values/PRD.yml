@@ -1,0 +1,8 @@
+Resources:
+  s3Usage:
+    Resource:
+      - arn:aws:s3:::*/*
+      - arn:aws:s3:::*
+  lambdausage:
+    Resource:
+      - arn:aws:lambda:us-oest-1:{{account_prd}}:function:{{role_name}}

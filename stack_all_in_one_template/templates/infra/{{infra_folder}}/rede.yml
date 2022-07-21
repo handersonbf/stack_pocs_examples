@@ -1,0 +1,9 @@
+project:
+  initials: ai
+  name: {{infra_folder}}
+  type: infra
+  pci: no
+  technology:
+    language: terraform
+    framework: terraform
+  description: Terraform do Projeto {{name_app}}

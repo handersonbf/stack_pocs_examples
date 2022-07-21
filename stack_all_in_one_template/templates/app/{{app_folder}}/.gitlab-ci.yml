@@ -1,0 +1,38 @@
+include:
+  - project: 'DevOps/templates/ci_cd'
+    file: 'java_maven_ecs.yaml'
+    
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+#  FORTIFY_VERSION: java-1.8.0-centos
+  JAVA_VERSION: "1.11.0"
+  MAVEN_VERSION: "3.6.3-jdk11"
+  JDK_VERSION: 11
+  ENABLE_CONTINUE_DEPLOY_HOM: "true"
+  ENABLE_CONTINUE_DEPLOY_PRD: "true"
+  DISABLE_TEST: "true" 
+  DISABLE_INSPECTION_QUALITY: "false" 
+  DISABLE_INSPECTION_SECURITY: "false" 
+
+
+###
+### GITFLOW REDE
+###
+package:
+  only:
+    - branches
+    - tags
+  variables:
+    appdynamics: "true"
+  
+deploy_dev_ecs:
+  only:
+    - develop
+  when: manual
+
+# Configuracao Temporaria Abaixo:
+security_check:
+  allow_failure: true
+  
+security:
+  allow_failure: true

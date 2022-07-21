@@ -1,0 +1,18 @@
+Resources:
+  {{name_role_resource}}:
+    Type: "AWS::IAM::Role"
+    Properties:
+      RoleName: {{role_name}}-role
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaVPCAccessExecutionRole
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaRole
+      Path: /      
+    ApiGWPolicy:
+    Type: 'AWS::IAM::ManagedPolicy'
+    Properties:
+      ManagedPolicyName: {{role_name}}-lambda-invocation-policy
+      Path: '/'
+      Roles:
+        - Ref: {{name_role_resource}}
+

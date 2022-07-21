@@ -1,0 +1,9 @@
+project:
+  initials: ow9
+  name: {{role_name}}
+  description: ow9-policies-automate
+  type: infra
+  pci: no
+  tecnology:
+    language: aws
+    framework: role
