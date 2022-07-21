@@ -1,0 +1,28 @@
+name: stack_all_in_one_template
+description: Template para projetos All-in-one (App, Infra, Roles)
+types:
+  - app-template
+inputs:
+  - label: Project name
+    type: text
+    name: project_name
+    required: true
+  - label: Sigla
+    type: text
+    name: sigla
+    required: true
+  - label: Account DEV
+    type: text
+    name: account_dev
+    required: true
+computedInputs:    
+  lower_project_name: "{{project_name|lower}}"
+  lower_sigla: "{{sigla|lower}}"
+  name_app: "{{lower_project_name|replace(' ','-')}}"
+  app_folder: "{{name_app}}"
+  infra_folder: "{{name_app ~ '_terraform'}}"
+  role_folder: "{{lower_sigla ~ '-role-' ~ app_folder}}"
+  role_name: "{{lower_sigla ~ '-' ~ name_app}}"
+  role_policy: "{{role_name ~ '-policy'}}"
+  name_role_camelCase: "{% for item in role_name.split('-') %}{{item.capitalize()}}{% endfor %}"
+  name_role_resource: "{{name_role_camelCase ~ 'Role'}}"
